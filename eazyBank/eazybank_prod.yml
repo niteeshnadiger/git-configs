@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: ${SPRING_APP_NAME:eazybank}
+    profiles:
+      active: prod
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:/data/todo
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  config:
+    import: optional:configserver:http://localhost:8888
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      default: http://localhost:8761/eureka
+
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: true
+        secure: false
+      timeout: 2m
+
+logging:
+  level: ${LOG_LEVEL_SPRING_SECURITY:ERROR}
+  logback:
+    rollingpolicy:
+      file-name-pattern: /var/log/eazybank/eazybank.%d{yyyy-MM-dd}.%i.log
+      max-history: 30
+      total-size-cap: 1GB
+      max-file-size: 10MB
+    level:
+      root: ${LOG_LEVEL_ROOT:INFO}
+      com.eazybank: ${LOG_LEVEL_COM_EAZYBANK:DEBUG}
+      org.springframework.security: ${LOG_LEVEL_SPRING_SECURITY:TRACE}
+  pattern:
+    console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n}
+  file:
+    name: /var/log/eazybank/eazybank.log
