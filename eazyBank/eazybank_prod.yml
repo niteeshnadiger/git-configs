@@ -37,18 +37,17 @@ server:
       timeout: 2m
 
 logging:
-  level: ${LOG_LEVEL_SPRING_SECURITY:ERROR}
-  logback:
-    rollingpolicy:
-      file-name-pattern: /var/log/eazybank/eazybank.%d{yyyy-MM-dd}.%i.log
-      max-history: 30
-      total-size-cap: 1GB
-      max-file-size: 10MB
-    level:
+  level:
       root: ${LOG_LEVEL_ROOT:INFO}
       com.eazybank: ${LOG_LEVEL_COM_EAZYBANK:DEBUG}
       org.springframework.security: ${LOG_LEVEL_SPRING_SECURITY:TRACE}
+  logback:
+    rollingpolicy:
+      file-name-pattern: /var/log/eazybank/eazybank_prod.%d{yyyy-MM-dd}.%i.log
+      max-history: 30
+      total-size-cap: 1GB
+      max-file-size: 10MB
   pattern:
     console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n}
   file:
-    name: /var/log/eazybank/eazybank.log
+    name: /var/log/eazybank/eazybank_prod.log
