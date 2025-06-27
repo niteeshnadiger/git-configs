@@ -1,10 +1,9 @@
 spring:
   application:
     name: ${SPRING_APP_NAME:eazybank}
-  profiles:
-    active: qa
+    profiles:
+      active: prod
   datasource:
-    url: jdbc:h2:mem:testdb
     username: sa
     password: password
     driver-class-name: org.h2.Driver
@@ -43,11 +42,11 @@ logging:
       org.springframework.security: ${LOG_LEVEL_SPRING_SECURITY:TRACE}
   logback:
     rollingpolicy:
-      file-name-pattern: /var/log/eazybank/eazybank_qa.%d{yyyy-MM-dd}.%i.log
+      file-name-pattern: /var/log/eazybank/eazybank_prod.%d{yyyy-MM-dd}.%i.log
       max-history: 30
       total-size-cap: 1GB
       max-file-size: 10MB
   pattern:
     console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n}
   file:
-    name: /var/log/eazybank/eazybank_qa.log
+    name: /var/log/eazybank/eazybank_prod.log
